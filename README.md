@@ -1,1 +1,3 @@
-libauth
+# libauth
+
+Bynd Authentication Development Module
