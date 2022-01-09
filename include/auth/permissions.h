@@ -1,6 +1,8 @@
 #ifndef _BYND_PERMISSIONS_H_
 #define _BYND_PERMISSIONS_H_
 
+#include <stdbool.h>
+
 #include <cerver/collections/dlist.h>
 
 #include "auth/auth.h"
@@ -33,9 +35,17 @@ typedef struct _Permissions Permissions;
 
 AUTH_PRIVATE void permissions_delete (void *permissions_ptr);
 
+AUTH_EXPORT const char *permissions_get_competition (
+	const Permissions *permissions
+);
+
 AUTH_PRIVATE Permissions *permissions_create (void);
 
 AUTH_PUBLIC void permissions_print (const Permissions *permissions);
+
+AUTH_EXPORT bool permissions_has_action (
+	const Permissions *permissions, const char *action
+);
 
 #ifdef __cplusplus
 }

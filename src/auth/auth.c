@@ -57,6 +57,24 @@ void bynd_auth_delete (void *auth_ptr) {
 
 }
 
+const ByndAuthType bynd_auth_get_type (const ByndAuth *bynd_auth) {
+
+	return bynd_auth->type;
+
+}
+
+const char *bynd_auth_get_competition (const ByndAuth *bynd_auth) {
+
+	return bynd_auth->competition;
+
+}
+
+const char *bynd_auth_get_action (const ByndAuth *bynd_auth) {
+
+	return bynd_auth->action;
+
+}
+
 DoubleList *bynd_auth_get_permissions (ByndAuth *bynd_auth) {
 
 	return bynd_auth->permissions;

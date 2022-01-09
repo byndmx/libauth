@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "auth/auth.h"
 #include "auth/permissions.h"
@@ -50,6 +51,12 @@ void permissions_delete (void *permissions_ptr) {
 
 }
 
+const char *permissions_get_competition (const Permissions *permissions) {
+
+	return permissions->competition;
+
+}
+
 Permissions *permissions_create (void) {
 
 	Permissions *permissions = permissions_new ();
@@ -73,5 +80,26 @@ void permissions_print (const Permissions *permissions) {
 			(void) printf ("\t%s\n", ((PermissionsAction *) le->data)->action);
 		}
 	}
+
+}
+
+bool permissions_has_action (
+	const Permissions *permissions, const char *action
+) {
+
+	bool result = false;
+
+	ListElement *le = NULL;
+	PermissionsAction *permissions_action = NULL;
+	dlist_for_each (permissions->actions, le) {
+		permissions_action = (PermissionsAction *) le->data;
+
+		if (!strcmp (permissions_action->action, action)) {
+			result = true;
+			break;
+		}
+	}
+
+	return result;
 
 }
