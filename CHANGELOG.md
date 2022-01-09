@@ -1,1 +1,2 @@
-- Added missing retval when handling management
+- Added methods to get fields from bynd auth
+- Added ability to check if permissions has action
