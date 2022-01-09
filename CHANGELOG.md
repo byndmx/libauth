@@ -1,2 +1,2 @@
-- Added methods to get fields from bynd auth
-- Added ability to check if permissions has action
+- Handling admin field in bynd auth structure
+- Fixed strings compilation warnings related
