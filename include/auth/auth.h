@@ -1,7 +1,7 @@
 #ifndef _BYND_AUTH_H_
 #define _BYND_AUTH_H_
 
-#include <stdint.h>
+#include <stdbool.h>
 
 #include <cerver/collections/dlist.h>
 
@@ -43,6 +43,8 @@ typedef struct ByndAuth {
 	char competition[AUTH_COMPETITION_SIZE];
 	char action[AUTH_ACTION_SIZE];
 
+	bool super_admin;
+
 	DoubleList *permissions;
 	ListElement *next_permissions;
 
@@ -59,6 +61,10 @@ AUTH_EXPORT const char *bynd_auth_get_competition (
 );
 
 AUTH_EXPORT const char *bynd_auth_get_action (
+	const ByndAuth *bynd_auth
+);
+
+AUTH_EXPORT const bool bynd_auth_get_admin (
 	const ByndAuth *bynd_auth
 );
 
