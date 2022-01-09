@@ -288,6 +288,8 @@ static unsigned int bynd_management_authentication_handle_response (
 		bynd_management_authentication_parse_json (bynd_auth, json_body);
 
 		json_decref (json_body);
+
+		retval = 0;
 	}
 
 	#ifdef BYND_DEBUG
