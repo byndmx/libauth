@@ -75,6 +75,18 @@ const char *bynd_auth_get_action (const ByndAuth *bynd_auth) {
 
 }
 
+const bool bynd_auth_get_admin (const ByndAuth *bynd_auth) {
+
+	return bynd_auth->super_admin;
+
+}
+
+static void bynd_auth_set_admin (ByndAuth *bynd_auth, const bool is_admin) {
+
+	bynd_auth->super_admin = is_admin;
+
+}
+
 DoubleList *bynd_auth_get_permissions (ByndAuth *bynd_auth) {
 
 	return bynd_auth->permissions;
@@ -150,8 +162,8 @@ static void bynd_single_authentication_internal (
 
 	ByndAuth *bynd_auth = bynd_auth_create (BYND_AUTH_TYPE_SINGLE);
 
-	(void) strncpy (bynd_auth->competition, competition, AUTH_COMPETITION_SIZE);
-	(void) strncpy (bynd_auth->action, action, AUTH_ACTION_SIZE);
+	(void) strncpy (bynd_auth->competition, competition, AUTH_COMPETITION_SIZE - 1);
+	(void) strncpy (bynd_auth->action, action, AUTH_ACTION_SIZE - 1);
 
 	http_request_set_custom_data (
 		(HttpRequest *) request, bynd_auth
@@ -227,7 +239,7 @@ static inline void bynd_management_authentication_parse_single_competition (
 				(void) strncpy (
 					permissions->competition,
 					json_string_value (value),
-					AUTH_COMPETITION_SIZE
+					AUTH_COMPETITION_SIZE - 1
 				);
 			}
 
@@ -288,6 +300,10 @@ static inline void bynd_management_authentication_parse_json (
 						bynd_auth, value
 					);
 				}
+			}
+
+			else if (!strcmp (key, "admin")) {
+				bynd_auth_set_admin (bynd_auth, json_boolean_value (value));
 			}
 		}
 	}

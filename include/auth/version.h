@@ -1,10 +1,10 @@
 #ifndef _BYND_AUTH_VERSION_H_
 #define _BYND_AUTH_VERSION_H_
 
-#define BYND_AUTH_VERSION			"0.1.2"
-#define BYND_AUTH_VERSION_NAME		"Version 0.1.2"
+#define BYND_AUTH_VERSION			"0.1.3"
+#define BYND_AUTH_VERSION_NAME		"Version 0.1.3"
 #define BYND_AUTH_VERSION_DATE		"09/01/2022"
-#define BYND_AUTH_VERSION_TIME		"15:08 CST"
+#define BYND_AUTH_VERSION_TIME		"15:37 CST"
 #define BYND_AUTH_VERSION_AUTHOR	"Erick Salas"
 
 #ifdef __cplusplus
