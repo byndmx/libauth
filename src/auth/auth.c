@@ -162,8 +162,8 @@ static void bynd_single_authentication_internal (
 
 	ByndAuth *bynd_auth = bynd_auth_create (BYND_AUTH_TYPE_SINGLE);
 
-	(void) strncpy (bynd_auth->competition, competition, AUTH_COMPETITION_SIZE);
-	(void) strncpy (bynd_auth->action, action, AUTH_ACTION_SIZE);
+	(void) strncpy (bynd_auth->competition, competition, AUTH_COMPETITION_SIZE - 1);
+	(void) strncpy (bynd_auth->action, action, AUTH_ACTION_SIZE - 1);
 
 	http_request_set_custom_data (
 		(HttpRequest *) request, bynd_auth
@@ -239,7 +239,7 @@ static inline void bynd_management_authentication_parse_single_competition (
 				(void) strncpy (
 					permissions->competition,
 					json_string_value (value),
-					AUTH_COMPETITION_SIZE
+					AUTH_COMPETITION_SIZE - 1
 				);
 			}
 
