@@ -50,6 +50,18 @@ typedef struct ByndAuth {
 
 AUTH_PUBLIC void bynd_auth_delete (void *auth_ptr);
 
+AUTH_EXPORT const ByndAuthType bynd_auth_get_type (
+	const ByndAuth *bynd_auth
+);
+
+AUTH_EXPORT const char *bynd_auth_get_competition (
+	const ByndAuth *bynd_auth
+);
+
+AUTH_EXPORT const char *bynd_auth_get_action (
+	const ByndAuth *bynd_auth
+);
+
 AUTH_EXPORT DoubleList *bynd_auth_get_permissions (
 	ByndAuth *bynd_auth
 );
