@@ -1,0 +1,44 @@
+#ifndef _BYND_PERMISSIONS_H_
+#define _BYND_PERMISSIONS_H_
+
+#include <cerver/collections/dlist.h>
+
+#include "auth/auth.h"
+#include "auth/config.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct PermissionsAction {
+
+	unsigned int action_len;
+	char action[AUTH_ACTION_SIZE];
+
+} PermissionsAction;
+
+AUTH_PRIVATE PermissionsAction *permissions_action_create (const char *action);
+
+AUTH_PRIVATE void permissions_action_delete (void *permissions_action_ptr);
+
+struct _Permissions {
+
+	char competition[AUTH_COMPETITION_SIZE];
+
+	DoubleList *actions;
+
+};
+
+typedef struct _Permissions Permissions;
+
+AUTH_PRIVATE void permissions_delete (void *permissions_ptr);
+
+AUTH_PRIVATE Permissions *permissions_create (void);
+
+AUTH_PUBLIC void permissions_print (const Permissions *permissions);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
