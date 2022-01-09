@@ -7,6 +7,7 @@
 #include <cerver/utils/log.h>
 #endif
 
+#include "auth/auth.h"
 #include "auth/requests.h"
 
 const char *request_result_to_string (const RequestResult type) {
@@ -40,22 +41,41 @@ void auth_request_delete (void *request_ptr) {
 
 }
 
-void auth_request_create (
-	AuthRequest *auth_request,
-	const char *api_key,
-	const char *service_id
+void auth_request_create_single (
+	AuthRequest *auth_request, const char *token,
+	const char *competition, const char *action
 ) {
 
 	// prepare the request
 	(void) snprintf (
 		auth_request->auth_header, AUTH_HEADER_SIZE - 1,
-		"Authorization: %s", api_key
+		"Authorization: %s", token
 	);
 
 	(void) snprintf (
 		auth_request->body, AUTH_REQUEST_SIZE - 1,
-		"{ \"service\": \"%s\" }",
-		service_id
+		"{ \"type\": \"%d\", \"competition\": \"%s\", \"action\": \"%s\" }",
+		BYND_AUTH_TYPE_SINGLE, competition, action
+	);
+
+	auth_request->body_len = strlen (auth_request->body);
+
+}
+
+void auth_request_create_management (
+	AuthRequest *auth_request, const char *token
+) {
+
+	// prepare the request
+	(void) snprintf (
+		auth_request->auth_header, AUTH_HEADER_SIZE - 1,
+		"Authorization: %s", token
+	);
+
+	(void) snprintf (
+		auth_request->body, AUTH_REQUEST_SIZE - 1,
+		"{ \"type\": \"%d\" }",
+		BYND_AUTH_TYPE_MANAGEMENT
 	);
 
 	auth_request->body_len = strlen (auth_request->body);
